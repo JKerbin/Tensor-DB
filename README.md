@@ -7,5 +7,4 @@
 
 ```bash
 pip install -r requirements.txt
-#cpu 版本
-conda install faiss-cpu -c pytorch
+conda install faiss-cpu -c pytorch #cpu 版本
