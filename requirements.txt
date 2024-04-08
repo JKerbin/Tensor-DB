@@ -9,3 +9,4 @@ torchvision==0.17.2
 tqdm==4.66.2
 jieba==0.42.1
 pypdfium2==4.28.0
+gevent==24.2.1
