@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebUI</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cpath d='M512 0a512 512 0 1 0 512 512A512 512 0 0 0 512 0zM398.336 735.232A223.232 223.232 0 0 1 175.104 512V341.504a51.2 51.2 0 1 1 105.472 0V512a117.76 117.76 0 1 0 235.52 0V341.504a51.2 51.2 0 0 1 105.472 0V512a223.232 223.232 0 0 1-223.232 223.232z m450.56-51.2a51.2 51.2 0 1 1-105.472 0V341.504a51.2 51.2 0 0 1 105.472 0z'/%3E%3C/svg%3E"
+        type="image/svg+xml">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <span>WebUI</span>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="input-container">
+            <div class="container">
+                <input onclick="sendMessage()" class="checkbox" type="checkbox">
+                <div class="mainbox">
+                    <div class="iconContainer">
+                        <svg viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg" class="search_icon">
+                            <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                            </path>
+                        </svg>
+                    </div>
+                    <input id="user-input" class="search_input" placeholder="search your text here~" type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var message = document.getElementById("user-input").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var chatBox = document.getElementById("chat-box");
+                    chatBox.innerHTML += '<div class="user-message">' + message + '</div>';
+                    chatBox.innerHTML += '<div class="bot-message">' + this.responseText + '</div>';
+                    document.getElementById("user-input").value = "";
+                }
+            };
+            xhttp.open("POST", "/send_message", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("message=" + message);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+User: from scripts.database import Mysql
+Bot: 应用 Image-Pro Plus 6
+User: I extend this account in two ways
+Bot: I extend this account in two ways
+User: I extend this account in two ways
+Bot: I extend this account in two ways
+User: this
+Bot: CJTER
+User: 黄嘉祥
+Bot: 05)
+User: 我叫黄嘉祥
+Bot: 由于内皮细胞 1
