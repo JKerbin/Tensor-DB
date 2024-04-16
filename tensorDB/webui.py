@@ -18,7 +18,7 @@ def send_message():
     message = request.form['message']
     query = [embedding.embedding(message)]  # 查询集
     query = np.array(query).astype('float32')
-    ind, reply = generate_reply(query)  # 生成回复的函数，这里需要你自己实现
+    ind, reply = generate_reply(query)
     with open('log/messages.txt', 'a') as f:
         f.write('User: ' + message + '\n')
         f.write('Bot: ' + reply + '\n')  # 保存回复
