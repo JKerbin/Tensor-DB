@@ -36,26 +36,44 @@ def get_texts(start_index=0, end_index=-1):
 
 
 # 示例函数：添加 PDF
-def add_pdf(url):
-    add_pdf_url = base_url + 'add_pdf'
-    data = {'url': url, 'user': mysql_config['user'], 'pw': mysql_config['pw'], 'db_name': mysql_config['db_name'],
+def add_pdf(pdf_url):
+    url = base_url + 'add_pdf'
+    data = {'url': pdf_url, 'user': mysql_config['user'], 'pw': mysql_config['pw'], 'db_name': mysql_config['db_name'],
             'tb_name': mysql_config['tb_name'], 'host': mysql_config['host'], 'port': mysql_config['port']}
-    response = requests.post(add_pdf_url, json=data)
+    response = requests.post(url, json=data)
     if response.status_code == 200:
         print(response.json()['message'])
     else:
         print('requests failed')
 
 
+def query(text):
+    url = base_url + 'query'
+    data = {'text': text, 'user': mysql_config['user'], 'pw': mysql_config['pw'], 'db_name': mysql_config['db_name'],
+            'tb_name': mysql_config['tb_name'], 'host': mysql_config['host'], 'port': mysql_config['port']}
+    response = requests.post(url, json=data)
+    if response.status_code == 200:
+        ind = response.json().get('index')
+        res = response.json().get('result')
+        return ind, res
+    else:
+        print('Request failed')
+        return None, None
+
+
 # 调用示例函数
 if __name__ == "__main__":
-    # 示例：获取张量
-    data_tensors = get_tensors(start_index=-1)
-    print(data_tensors.shape)
+    # # 示例：获取张量
+    # data_tensors = get_tensors(start_index=-1)
+    # print(data_tensors.shape)
+    #
+    # # 示例：获取文本
+    # data_texts = get_texts(start_index=-1)
+    # print(data_texts)
+    #
+    # # 示例：添加 PDF
+    # add_pdf('https://www.gjtool.cn/pdfh5/git.pdf')
 
-    # 示例：获取文本
-    data_texts = get_texts(start_index=-1)
-    print(data_texts)
-
-    # 示例：添加 PDF
-    add_pdf('https://www.gjtool.cn/pdfh5/git.pdf')
+    data_qi, data_qr = query(text='这是一个测试语句，我是开发者')
+    print(data_qi)
+    print(data_qr)
