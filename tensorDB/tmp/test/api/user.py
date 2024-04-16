@@ -63,16 +63,16 @@ def query(text):
 
 # 调用示例函数
 if __name__ == "__main__":
-    # # 示例：获取张量
-    # data_tensors = get_tensors(start_index=-1)
-    # print(data_tensors.shape)
-    #
-    # # 示例：获取文本
-    # data_texts = get_texts(start_index=-1)
-    # print(data_texts)
-    #
-    # # 示例：添加 PDF
-    # add_pdf('https://www.gjtool.cn/pdfh5/git.pdf')
+    # 示例：获取张量
+    data_tensors = get_tensors(start_index=-1)
+    print(data_tensors.shape)
+
+    # 示例：获取文本
+    data_texts = get_texts(start_index=-1)
+    print(data_texts)
+
+    # 示例：添加 PDF
+    add_pdf('https://www.gjtool.cn/pdfh5/git.pdf')
 
     data_qi, data_qr = query(text='这是一个测试语句，我是开发者')
     print(data_qi)
